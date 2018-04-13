@@ -63,3 +63,9 @@ function genFromTemplate(template, FindAndReplaceArr) {
   request.send();
   return template;
 }
+
+function toggleCommunities() {
+  if (document.getElementsByClassName("communitylist")[0].style.display == "block") {
+    document.getElementsByClassName("communitylist")[0].style.display = "none"; } else {
+    document.getElementsByClassName("communitylist")[0].style.display = "block"; }
+}
