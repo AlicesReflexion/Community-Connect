@@ -27,3 +27,17 @@ function signOut() {
       console.log("Signed Out");
   });
 }
+
+function populateCommunities(userId) {
+  var communityList;
+  var communityNames = [];
+  firebase.database().ref('/User List/' + userId + "/Communities").once('value').then(function(snapshot) {
+    communityList = Object.values(snapshot.toJSON());
+    communityList.forEach(function(element) {
+      firebase.database().ref('/Community List/' + element + '/Name').once('value').then(function(snapshot) {
+        communityNames.push(snapshot.val());
+      });
+    });
+    console.log(communityNames);
+  });
+}
