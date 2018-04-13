@@ -16,17 +16,17 @@ body {
   height: 10ch;
 }
 
-.latest-posts > .post {
+#div_PostList > div > .post {
   border: 1px solid #454545;
   margin: 5px;
 }
 
-.latest-posts > .post.priority {
+#div_PriorityList > div > .post.priority {
   border: 2px solid #702323;
   background: #ffcccc;
 }
 
-.latest-posts > .post > .content {
+#div_PostList > div > .post > .content {
   padding: 3px;
 }
 
