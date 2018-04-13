@@ -38,9 +38,16 @@ function populateCommunities(userId) {
       firebase.database().ref('/Community List/' + element + '/Name').once('value').then(function(snapshot) {
         communityNames.push(snapshot.val());
         template += genFromTemplate("communitylist.html", [{"find": "CommunityID", "replace": element},{"find": "communityName", "replace": snapshot.val()}]);
+        if (communityNames.length == communityList.length) {
+          insertCommunities(template);
+        }
       });
     });
   });
+}
+
+function insertCommunities(template) {
+  document.getElementsByClassName("communitylist")[0].innerHTML = template;
 }
 
 function genFromTemplate(template, FindAndReplaceArr) {
