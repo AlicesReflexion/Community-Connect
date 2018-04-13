@@ -66,6 +66,7 @@ angular.module('myApp', [])
                 $scope.$apply();
             }
         });
+    });
 
 function grabPosts(community) {
   var posts = firebase.database().ref('/Community List/' + community + "/Post");
