@@ -31,13 +31,28 @@ function signOut() {
 function populateCommunities(userId) {
   var communityList;
   var communityNames = [];
+  var template = "";
   firebase.database().ref('/User List/' + userId + "/Communities").once('value').then(function(snapshot) {
     communityList = Object.values(snapshot.toJSON());
     communityList.forEach(function(element) {
       firebase.database().ref('/Community List/' + element + '/Name').once('value').then(function(snapshot) {
         communityNames.push(snapshot.val());
+        template += genFromTemplate("communitylist.html", [{"find": "CommunityID", "replace": element},{"find": "communityName", "replace": snapshot.val()}]);
       });
     });
-    console.log(communityNames);
   });
+}
+
+function genFromTemplate(template, FindAndReplaceArr) {
+  var request = new XMLHttpRequest();
+  request.open('GET', template, false);
+  var template = ""; 
+  request.onload = function() {
+    template = request.responseText;
+    FindAndReplaceArr.forEach(function(element) {
+      template = template.replace("{{" + element.find + "}}", element.replace);
+    });
+  }
+  request.send();
+  return template;
 }
