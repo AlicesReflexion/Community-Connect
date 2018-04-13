@@ -79,8 +79,13 @@ function genFromTemplate(template, FindAndReplaceArr) {
 function grabPosts(community) {
   var posts = firebase.database().ref('/Community List/' + community + "/Post");
   posts.on('value', function(snapshot) {
-    console.log(snapshot.val());
-});
+    snapshot.forEach(function (element) {
+      var text = element.toJSON().Title;
+      var username = element.toJSON().Creator.Name;
+      var template = genFromTemplate("posts.html", [{"find": "Post Text", "replace": text},{"find": "User Name", "replace": username}]);
+      console.log(template); 
+    });
+    });
 }
 
 function toggleCommunities() {
