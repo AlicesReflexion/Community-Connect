@@ -1,31 +1,20 @@
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script src="main.js"></script>
+
     <link rel="stylesheet" href="style.css">
-    <script>
-      firebase.auth().onAuthStateChanged(function(user) {
-      if (user == null) {
-        window.location.replace("signin.html");
-      } else {
-        populateCommunities(firebase.auth().currentUser.uid);
-      }
-      });
-    var url = new URL(window.location);
-    var community = url.searchParams.get("community");
-    grabPosts(community);
-    </script>
   <body>
   <div class="header">
-    <h1>{{Community Name}}</h1>
+    <h1>Community Name</h1>
     <div class="usercontrol">
-      <h2>{{User Name}}</h2>
-    <h2><a href="#" onclick="toggleCommunities()">My communities</a></h2>
-    <h2><a href="#" onclick="signOut()">Sign Out</a></h2>    
+    <h2>User Name</h2>
+    <h2>My communities</h2>
+    <h2>Sign Out</h2>
     </div>
   </div>
-  <div class="communitylist"></div>
-  <div id="latest-posts">
+  <div class="latest-posts">
     <div class="postform">
       <form>
       <textarea></textarea>
@@ -49,29 +38,32 @@
       </div>
       </div>
       <div lang="en" ng-app="myApp" class="no-js">
-          <div id="div_PriorityList">
-              <h2 style="text-align: center; color: #1ab188"> Top Five Picks From FourSquare Review API </h2>
-              <ul>
-                  <li ng-repeat="post in PriorityList"
-                      style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none">
-                      <div id="PPost">
-                          <h3>{{post.name}}</h3>
-                      </div>
-                  </li>
-              </ul>
+          <div ng-controller="View1Ctrl">
+              <div id="div_PriorityList">
+                  <h2 style="text-align: center; color: #1ab188">Community Post</h2>
+                  <ul>
+                      <li ng-repeat="post in PriorityList"
+                          style="font-size: x-large; color: Red; text-align: center; list-style: none">
+                          <div id="PPost">
+                              <h3>{{post.Title}}</h3>
+                              <h4>Creator: {{post.Creator.Name}}</h4>
+                          </div>
+                      </li>
+                  </ul>
 
-          </div>
-          <div id="div_PostList">
-              <h2 style="text-align: center; color: #1ab188"> Top Five Picks From FourSquare Review API </h2>
-              <ul>
-                  <li ng-repeat="post in PostList"
-                      style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none">
-                      <div id="NPost">
-                          <h3>{{post.Title}}</h3>
-                      </div>
-                  </li>
-              </ul>
+              </div>
+              <div id="div_PostList">
+                  <ul>
+                      <li ng-repeat="post in PostList"
+                          style="font-size: x-large; color: lightblue; text-align: center; list-style: none">
+                          <div id="NPost">
+                              <h3>{{post.Title}}</h3>
+                              <h4>Creator: {{post.Creator.Name}}</h4>
+                          </div>
+                      </li>
+                  </ul>
 
+              </div>
           </div>
       </div>
 
