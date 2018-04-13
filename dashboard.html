@@ -7,7 +7,8 @@
       firebase.auth().onAuthStateChanged(function(user) {
       if (user == null) {
         window.location.replace("signin.html");
-      }
+      } else {
+        populateCommunities(firebase.auth().currentUser.uid);
       });
     </script>
   <body>
@@ -19,6 +20,7 @@
     <h2><a href="#" onclick="signOut()">Sign Out</a></h2>
     </div>
   </div>
+  <div class="communitylist"></div>
   <div class="latest-posts">
     <div class="postform">
       <form>
