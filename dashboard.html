@@ -1,20 +1,31 @@
 <html>
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script src="main.js"></script>
-
     <link rel="stylesheet" href="style.css">
+    <script>
+      firebase.auth().onAuthStateChanged(function(user) {
+      if (user == null) {
+        window.location.replace("signin.html");
+      } else {
+        populateCommunities(firebase.auth().currentUser.uid);
+      }
+      });
+    var url = new URL(window.location);
+    var community = url.searchParams.get("community");
+    grabPosts(community);
+    </script>
   <body>
   <div class="header">
-    <h1>Community Name</h1>
+    <h1>{{Community Name}}</h1>
     <div class="usercontrol">
-    <h2>User Name</h2>
-    <h2>My communities</h2>
-    <h2>Sign Out</h2>
+      <h2>{{User Name}}</h2>
+    <h2><a href="#" onclick="toggleCommunities()">My communities</a></h2>
+    <h2><a href="#" onclick="signOut()">Sign Out</a></h2>    
     </div>
   </div>
-  <div class="latest-posts">
+<div class="communitylist"></div>  <div class="latest-posts">
     <div class="postform">
       <form>
       <textarea></textarea>
