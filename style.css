@@ -2,7 +2,7 @@ body {
   margin-top: 60px;
 }
 
-.latest-posts {
+#latest-posts {
   min-width: 250px;
   width: 33%;
   position: absolute;
@@ -16,17 +16,17 @@ body {
   height: 10ch;
 }
 
-.latest-posts > .post {
+#latest-posts > .post {
   border: 1px solid #454545;
   margin: 5px;
 }
 
-.latest-posts > .post.priority {
+#latest-posts > .post.priority {
   border: 2px solid #702323;
   background: #ffcccc;
 }
 
-.latest-posts > .post > .content {
+#latest-posts > .post > .content {
   padding: 3px;
 }
 

@@ -17,7 +17,7 @@
     <div class="usercontrol">
     <h2>User Name</h2>
     <h2>My communities</h2>
-    <h2><a href="#" onclick="signOut()">Sign Out</a></h2>
+    <h2><a href="#" onclick="signOut()">Sign Out</a></h2>    
     </div>
   </div>
   <div class="communitylist"></div>
@@ -44,6 +44,33 @@
         <div class="username">Mushfiq</div><div class="time">Today at 07:45 AM</div>
       </div>
       </div>
+      <div lang="en" ng-app="myApp" class="no-js">
+          <div id="div_PriorityList">
+              <h2 style="text-align: center; color: #1ab188"> Top Five Picks From FourSquare Review API </h2>
+              <ul>
+                  <li ng-repeat="post in PriorityList"
+                      style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none">
+                      <div id="PPost">
+                          <h3>{{post.name}}</h3>
+                      </div>
+                  </li>
+              </ul>
+
+          </div>
+          <div id="div_PostList">
+              <h2 style="text-align: center; color: #1ab188"> Top Five Picks From FourSquare Review API </h2>
+              <ul>
+                  <li ng-repeat="post in PostList"
+                      style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none">
+                      <div id="NPost">
+                          <h3>{{post.Title}}</h3>
+                      </div>
+                  </li>
+              </ul>
+
+          </div>
+      </div>
+
   </div>
   </body>
 </html>
