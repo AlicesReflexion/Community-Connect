@@ -11,6 +11,9 @@
         populateCommunities(firebase.auth().currentUser.uid);
       }
       });
+    var url = new URL(window.location);
+    var community = url.searchParams.get("community");
+    grabPosts(community);
     </script>
   <body>
   <div class="header">

@@ -76,6 +76,13 @@ function genFromTemplate(template, FindAndReplaceArr) {
   return template;
 }
 
+function grabPosts(community) {
+  var posts = firebase.database().ref('/Community List/' + community + "/Post");
+  posts.on('value', function(snapshot) {
+    console.log(snapshot.val());
+});
+}
+
 function toggleCommunities() {
   if (document.getElementsByClassName("communitylist")[0].style.display == "block") {
     document.getElementsByClassName("communitylist")[0].style.display = "none"; } else {
