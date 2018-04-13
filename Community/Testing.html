@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB4Mpz4ECLl9RQU8kJZGg84j-EAcV7yKSA",
+        authDomain: "communityconnect-3f395.firebaseapp.com",
+        databaseURL: "https://communityconnect-3f395.firebaseio.com",
+        storageBucket: "communityconnect-3f395.appspot.com",
+    };
+
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    var leadsRef = database.ref('Community List');
+    leadsRef.on('value', function(snapshot) {
+
+        snapshot.forEach(function(childSnapshot) {
+            var childData = childSnapshot.val();
+            console.log(childData);
+        });
+    });
+
+
+</script>
+</body>
+</html>
