@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" class="no-js">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <title>Events</title>
+</head>
+<body>
+
+    <div ng-controller="View1Ctrl">
+        <div id="div_Event List">
+            <h2 style="text-align: center;">Community Events</h2>
+            <ul>
+                <li ng-repeat="event in EventList"
+                    style="font-size: x-large; text-align: center; list-style: none">
+                    <div id="PPost">
+                        <h3>{{event.name}}</h3>
+                        <h4>Address: {{event.Address.Street}} {{event.Address.City}} {{event.Address.Zip}}</h4>
+                        <h4>Data: {{event.Date}}</h4>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="event_page.js"></script>
+
+</body>
+</html>
