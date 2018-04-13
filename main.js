@@ -14,8 +14,16 @@ function signin(e) {
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     alert("Incorrect email or password!");
   });
-}
 
 firebase.auth().onAuthStateChanged(function(user) {
-  console.log(user)
+  if (user) {
+    window.location.replace("dashboard.html");
+  }
 });
+}
+
+function signOut() {
+  firebase.auth().signOut().then(function() {
+      console.log("Signed Out");
+  });
+}
