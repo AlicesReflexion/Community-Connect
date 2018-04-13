@@ -1,23 +1,21 @@
 <html>
   <head>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
     <script src="main.js"></script>
     <link rel="stylesheet" href="style.css">
   <body>
   <div class="header">
-    <h1 id="Communit_Name">Community Name</h1>
+    <h1>Community Name</h1>
     <div class="usercontrol">
     <h2>User Name</h2>
     <h2>My communities</h2>
     <h2>Sign Out</h2>
     </div>
   </div>
-  <div id="latest-posts">
+  <div class="latest-posts">
     <div class="postform">
       <form>
       <textarea></textarea>
-      <input type="button" id="submitpost" value="Post!" onclick="add_post()">
+      <input type="button" id="submitpost" value="Post!">
       </form>
     </div>
     <div class="post priority">
@@ -35,35 +33,7 @@
       <div class="postinfo">
         <div class="username">Mushfiq</div><div class="time">Today at 07:45 AM</div>
       </div>
-    </div>
-
-     <div lang="en" ng-app="myApp" class="no-js">
-        <div ng-controller="View1Ctrl">
-          <h2 style="text-align: center;">Community Postings</h2>
-          <div id="div_PriorityList">
-            <ul>
-              <li ng-repeat="post in PriorityList"
-                  style="font-size: x-large; color: red; text-align: center; list-style: none">
-                <div id="Ppost">
-                  <h3>{{post.Title}}</h3>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div id="div_PostList">
-            <ul>
-              <li ng-repeat="post in PostList"
-                  style="font-size: x-large; color: blue; text-align: center; list-style: none">
-                <div id="Npost">
-                  <h3>{{post.Title}}</h3>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
-
-
   </div>
   </body>
 </html>
