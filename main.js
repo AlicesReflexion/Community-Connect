@@ -44,6 +44,11 @@ function populateCommunities(userId) {
       });
     });
   });
+  firebase.database().ref('/User List/' + userId + "/Name").once('value').then(function(snapshot) {
+    var header = document.getElementsByClassName("header")[0].innerHTML;
+    header = header.replace("{{User Name}}", snapshot.val());
+    document.getElementsByClassName("header")[0].innerHTML = header;
+  });
 }
 
 function insertCommunities(template) {
