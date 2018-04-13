@@ -71,3 +71,12 @@ body {
   font-size: 14px;
   margin-right: 5px;
 }
+
+.communitylist {
+  border: 2px solid #121212;
+  position: absolute;
+  top: 30px;
+  right: 100px;
+  transform: translate(50%, 0);
+  display: none;
+}
