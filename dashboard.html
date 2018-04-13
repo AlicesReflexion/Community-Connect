@@ -1,6 +1,9 @@
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script src="main.js"></script>
+
     <link rel="stylesheet" href="style.css">
   <body>
   <div class="header">
@@ -35,29 +38,32 @@
       </div>
       </div>
       <div lang="en" ng-app="myApp" class="no-js">
-          <div id="div_PriorityList">
-              <h2 style="text-align: center; color: #1ab188"> Top Five Picks From FourSquare Review API </h2>
-              <ul>
-                  <li ng-repeat="post in PriorityList"
-                      style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none">
-                      <div id="PPost">
-                          <h3>{{post.name}}</h3>
-                      </div>
-                  </li>
-              </ul>
+          <div ng-controller="View1Ctrl">
+              <div id="div_PriorityList">
+                  <h2 style="text-align: center; color: #1ab188">Community Post</h2>
+                  <ul>
+                      <li ng-repeat="post in PriorityList"
+                          style="font-size: x-large; color: Red; text-align: center; list-style: none">
+                          <div id="PPost">
+                              <h3>{{post.Title}}</h3>
+                              <h4>Creator: {{post.Creator.Name}}</h4>
+                          </div>
+                      </li>
+                  </ul>
 
-          </div>
-          <div id="div_PostList">
-              <h2 style="text-align: center; color: #1ab188"> Top Five Picks From FourSquare Review API </h2>
-              <ul>
-                  <li ng-repeat="post in PostList"
-                      style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none">
-                      <div id="NPost">
-                          <h3>{{post.Title}}</h3>
-                      </div>
-                  </li>
-              </ul>
+              </div>
+              <div id="div_PostList">
+                  <ul>
+                      <li ng-repeat="post in PostList"
+                          style="font-size: x-large; color: lightblue; text-align: center; list-style: none">
+                          <div id="NPost">
+                              <h3>{{post.Title}}</h3>
+                              <h4>Creator: {{post.Creator.Name}}</h4>
+                          </div>
+                      </li>
+                  </ul>
 
+              </div>
           </div>
       </div>
 
