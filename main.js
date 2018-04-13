@@ -138,7 +138,6 @@ function grabPosts(community) {
       var text = element.toJSON().Title;
       var username = element.toJSON().Creator.Name;
       var template = genFromTemplate("posts.html", [{"find": "Post Text", "replace": text},{"find": "User Name", "replace": username}]);
-      console.log(template); 
     });
     });
 }

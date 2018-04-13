@@ -1,10 +1,14 @@
+<!DOCTYPE html>
 <html>
-  <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-    <script src="main.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script>
+<head>
+
+  <script src=
+  "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+  <script src=
+  "https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="main.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script>
       firebase.auth().onAuthStateChanged(function(user) {
       if (user == null) {
         window.location.replace("signin.html");
@@ -15,69 +19,80 @@
     var url = new URL(window.location);
     var community = url.searchParams.get("community");
     grabPosts(community);
-    </script>
-  <body>
+  </script>
+  <title></title>
+</head>
+<body>
   <div class="header">
     <h1>{{Community Name}}</h1>
     <div class="usercontrol">
       <h2>{{User Name}}</h2>
-    <h2><a href="#" onclick="toggleCommunities()">My communities</a></h2>
-    <h2><a href="#" onclick="signOut()">Sign Out</a></h2>    
+      <h2><a href="#" onclick="toggleCommunities()">My
+      communities</a></h2>
+      <h2><a href="#" onclick="signOut()">Sign Out</a></h2>
     </div>
   </div>
-<div class="communitylist"></div>  <div class="latest-posts">
+  <div class="communitylist"></div>
+  <div class="latest-posts" ng-app="myApp">
     <div class="postform">
       <form>
-      <textarea></textarea>
-      <input type="button" id="submitpost" value="Post!">
+        <textarea></textarea> <input type="button" id="submitpost"
+        value="Post!">
       </form>
     </div>
-    <div class="post priority">
-      <div class="content">
-        <p>This is an example of what a priority post would look like.</p>
-      </div>
-      <div class="postinfo">
-        <div class="username">Alex</div><div class="time">Yesterday at 11:30 PM</div>
+    <div ng-controller="View1Ctrl">
+      <div class="post priority">
+        <div class="content">
+          <p>This is an example of what a priority post would look
+          like.</p>
         </div>
-    </div>
-    <div class="post">
-      <div class="content">
-        <p>This is an example of a non-priority post</p>
-      </div>
-      <div class="postinfo">
-        <div class="username">Mushfiq</div><div class="time">Today at 07:45 AM</div>
-      </div>
-      </div>
-      <div lang="en" ng-app="myApp" class="no-js">
-          <div ng-controller="View1Ctrl">
-              <div id="div_PriorityList">
-                  <h2 style="text-align: center; color: #1ab188">Community Post</h2>
-                  <ul>
-                      <li ng-repeat="post in PriorityList"
-                          style="font-size: x-large; color: Red; text-align: center; list-style: none">
-                          <div id="PPost">
-                              <h3>{{post.Title}}</h3>
-                              <h4>Creator: {{post.Creator.Name}}</h4>
-                          </div>
-                      </li>
-                  </ul>
-
-              </div>
-              <div id="div_PostList">
-                  <ul>
-                      <li ng-repeat="post in PostList"
-                          style="font-size: x-large; color: lightblue; text-align: center; list-style: none">
-                          <div id="NPost">
-                              <h3>{{post.Title}}</h3>
-                              <h4>Creator: {{post.Creator.Name}}</h4>
-                          </div>
-                      </li>
-                  </ul>
-
-              </div>
+        <div class="postinfo">
+          <div class="username">
+            Alex
           </div>
+          <div class="time">
+            Yesterday at 11:30 PM
+          </div>
+        </div>
       </div>
-
+      <div ng-repeat="post in Postlist" id="NPost" class="post">
+        <div class="content">
+          <p>{{Post.Title}}</p>
+        </div>
+        <div class="postinfo">
+          <div class="username">
+            {{Post.Name}}
+          </div>
+          <div class="time">
+            Today at 07:45 AM
+          </div>
+        </div>
+      </div>
+      <div id="div_PriorityList">
+        <h2 style="text-align: center; color: #1ab188">Community
+        Post</h2>
+        <ul>
+          <li ng-repeat="post in PriorityList" style=
+          "font-size: x-large; color: Red; text-align: center; list-style: none">
+            <div id="PPost">
+              <h3>{{post.Title}}</h3>
+              <h4>Creator: {{post.Creator.Name}}</h4>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div id="div_PostList">
+        <ul>
+          <li ng-repeat="post in PostList" style=
+          "font-size: x-large; color: lightblue; text-align: center; list-style: none">
+            <div id="NPost">
+              <h3>{{post.Title}}</h3>
+              <h4>Creator: {{post.Creator.Name}}</h4>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-  </body>
+</body>
 </html>
