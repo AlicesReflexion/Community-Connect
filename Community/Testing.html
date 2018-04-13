@@ -20,10 +20,10 @@
 
     var leadsRef = database.ref('Community List');
     leadsRef.on('value', function(snapshot) {
-
         snapshot.forEach(function(childSnapshot) {
-            var childData = childSnapshot.val();
-            console.log(childData);
+            console.log(childSnapshot.key); //gets community ID
+            var childData = (childSnapshot.toJSON()); //converts data to json
+            console.log(childData.Events);// prints out event list
         });
     });
 
