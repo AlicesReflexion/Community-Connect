@@ -22,12 +22,12 @@ var Ref = database.ref('Community List');
             for(i=0; i < post_keys.length; i++){
                 var current_post = childData.Post[post_keys[i]];
                 //console.log(current_post);
-                if(current_post.Priority){
+                /*if(current_post.Priority){
                     priority_list.push(current_post);
                 }
                 else{
                     normal_list.push(current_post);
-                }
+                }*/
             }
             //var event_keys = Object.keys(childData.Events);
             //for(i=0; i < event_keys.length; i++){
@@ -42,7 +42,13 @@ var Ref = database.ref('Community List');
 function get_posts() {
   var currentPostsRef = firebase.database().ref('/Community List/' + currentCommunity() + '/Post');
   currentPostsRef.on('value', function(snapshot) {
-
+    Object.values(snapshot.val()).forEach(function(element) {
+      if (element.Priority) {
+        priority_list.push(element);
+      } else {
+        normal_list.push(element);
+      }
+    });
   });
 }
 
