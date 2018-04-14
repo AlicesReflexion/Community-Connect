@@ -14,7 +14,6 @@ var Ref = database.ref('Community List');
 
 
 function get_data() {
-    console.log(Date.now());
     return Ref.once('value').then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
         var childData = (childSnapshot.toJSON());
