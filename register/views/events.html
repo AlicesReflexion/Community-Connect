@@ -1,5 +1,15 @@
-<!--<section class="card events">-->
-    <!--&lt;!&ndash;<div class="eventlist">&ndash;&gt;-->
-        <!--&lt;!&ndash;<h2>Events!</h2>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--</section>-->
+<section class="card events">
+<div id="div_Event List">
+    <h2 style="text-align: center;">Community Events</h2>
+    <ul>
+        <li ng-repeat="event in EventList"
+            style="font-size: x-large; text-align: center; list-style: none">
+            <div id="PPost">
+                <h3>{{event.name}}</h3>
+                <h4>Address: {{event.Address.Street}} {{event.Address.City}} {{event.Address.Zip}}</h4>
+                <h4>Date: {{event.Date}}</h4>
+            </div>
+        </li>
+    </ul>
+</div>
+</section>
