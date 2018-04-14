@@ -76,7 +76,11 @@ body {
   border: 2px solid #121212;
   position: absolute;
   top: 30px;
-  right: 100px;
-  transform: translate(50%, 0);
+  right: 0;
   display: none;
+  width: 300px;
+}
+
+.communitylist > a {
+  display: block
 }
