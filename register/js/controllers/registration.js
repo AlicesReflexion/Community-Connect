@@ -7,6 +7,8 @@ myApp.controller('RegistrationController',
   };
 
   $scope.logout = function() {
+    sessionStorage.setItem("userID", null);
+    sessionStorage.setItem("community_id", null)
     Authentication.logout();
   };
 

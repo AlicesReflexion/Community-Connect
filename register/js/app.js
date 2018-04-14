@@ -27,7 +27,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     }).
     when('/community_create', {
         templateUrl: 'views/community_create.html',
-        controller: 'Community_CreateController'
+        controller: 'CreateController'
     }).
     when('/success', {
       templateUrl: 'views/success.html',

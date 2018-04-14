@@ -8,6 +8,8 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     $scope.PostList =[];
     $scope.current_user =null;
     $scope.community=null;
+    $scope.community = sessionStorage.getItem("community_id");
+    $scope.userid = sessionStorage.getItem("userID");
 
 
     //var user = $rootScope.currentUser;
@@ -16,15 +18,6 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
       $location.path('/events');
 
   };
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-           $scope.current_user = user;
-           $scope.$apply();
-
-        } else {
-            // No user is signed in.
-        }
-    });
 
    //get community
     $scope.getCommunity = function(){
@@ -53,10 +46,11 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                     $scope.load_post();
                 }
             });
+            if($scope.community == null){
+                $location.path('/community_create');
+            }
         });
-        if($scope.community == null){
 
-        }
 
     };
     //post function
@@ -86,6 +80,20 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
             alert("some errror");
         }
     };
-    //run get community function
-    $scope.getCommunity();
+
+    if($scope.userid != null){
+        //run get community function
+        $scope.getCommunity();
+    }
+    else{
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                $scope.current_user = user;
+                $scope.$apply();
+
+            } else {
+                // No user is signed in.
+            }
+        });
+    }
 }]);
