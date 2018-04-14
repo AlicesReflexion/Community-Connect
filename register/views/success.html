@@ -4,4 +4,43 @@
     <h1>Community Portal</h1>
     <p>{{ message }}</p>
   </div>
+  <div class="postform">
+    <form>
+      <textarea></textarea> <input class="btn" type="button" id="submitpost" value="Post!">
+    </form>
+  </div>
+  <div ng-repeat="post in PriorityList">
+    <div id="PPost" class="post priority">
+      <div class="content">
+        {{post.Title}}
+      </div>
+      <div class="postinfo">
+        <div class="username">
+          {{post.Creator.Name}}
+        </div>
+        <div class="time">
+          {{post.TimeStamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="div_PostList">
+    <div ng-repeat="post in PostList">
+      <div id="NPost" class="post">
+        <div class="content">
+          {{post.Title}}
+        </div>
+        <div class="postinfo">
+          <div class="username">
+            {{post.Creator.Name}}
+          </div>
+          <div class="time">
+            {{post.TimeStamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button ng-click="go_events_page()">Event Page</button>
 </div><!-- meetings cf -->
