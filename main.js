@@ -10,38 +10,9 @@ var database = firebase.database();
 var priority_list=[];
 var normal_list=[];
 
-var Ref = database.ref('Community List');
-
-
- function get_data() {
-    return Ref.once('value').then(function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-        var childData = (childSnapshot.toJSON());
-          console.log(childData);
-            var post_keys = Object.keys(childData.Post);
-            for(i=0; i < post_keys.length; i++){
-                var current_post = childData.Post[post_keys[i]];
-                //console.log(current_post);
-                /*if(current_post.Priority){
-                    priority_list.push(current_post);
-                }
-                else{
-                    normal_list.push(current_post);
-                }*/
-            }
-            //var event_keys = Object.keys(childData.Events);
-            //for(i=0; i < event_keys.length; i++){
-                //var current_event = childData.Events[event_keys[i]];
-                //console.log(current_event);
-            //}
-        });
-        return snapshot.val();
-    });
-}
-
 function get_posts() {
-  var currentPostsRef = firebase.database().ref('/Community List/' + currentCommunity() + '/Post');
-  currentPostsRef.on('value', function(snapshot) {
+  var refCurrentPostsRef = firebase.database().ref('/Community List/' + currentCommunity() + '/Post');
+  refCurrentPostsRef.on('value', function(snapshot) {
     Object.values(snapshot.val()).forEach(function(element) {
       if (element.Priority) {
         priority_list.push(element);
@@ -49,6 +20,8 @@ function get_posts() {
         normal_list.push(element);
       }
     });
+    var $scope = angular.element(document.querySelector('[ng-app=myApp]')).scope();
+   $scope.$apply(); 
   });
 }
 
@@ -75,17 +48,10 @@ firebase.auth().onAuthStateChanged(function(user) {
 }
   
 angular.module('myApp', [])
-
     .controller('View1Ctrl', function ($scope) {
         $scope.PriorityList=[];
-        get_data().then(function(successCallback, failureCallback){
-            if(successCallback){
-                $scope.PriorityList = priority_list;
-                $scope.PostList = normal_list;
-
-                $scope.$apply();
-            }
-        });
+        $scope.PriorityList = priority_list;
+        $scope.PostList = normal_list;
     });
 
 function signOut() {
