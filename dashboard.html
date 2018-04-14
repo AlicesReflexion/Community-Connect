@@ -41,27 +41,43 @@
       </form>
     </div>
     <div ng-controller="View1Ctrl">
-<div id="div_PriorityList">
+      <div id="div_PriorityList">
         <div ng-repeat="post in PriorityList">
           <div id="PPost" class="post priority">
-            <div class="content">{{post.Title}}</div>
+            <div class="content">
+              {{post.Title}}
+            </div>
             <div class="postinfo">
-              <div class="username">{{post.Creator.Name}}</div>
-              <div class="time">{{post.TimeStamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}</div>
+              <div class="username">
+                {{post.Creator.Name}}
+              </div>
+              <div class="time">
+                {{post.TimeStamp * 1000 | date:'yyyy-MM-dd HH:mm:ss
+                Z'}}
+              </div>
             </div>
           </div>
         </div>
-         <div id="div_PostList">
+        <div id="div_PostList">
           <div ng-repeat="post in PostList">
             <div id="NPost" class="post">
-              <div class="content">{{post.Title}}</div>
+              <div class="content">
+                {{post.Title}}
+              </div>
               <div class="postinfo">
-                <div class="username">{{post.Creator.Name}}</div>
-                <div class="time">{{post.TimeStamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}</div>
+                <div class="username">
+                  {{post.Creator.Name}}
+                </div>
+                <div class="time">
+                  {{post.TimeStamp * 1000 | date:'yyyy-MM-dd
+                  HH:mm:ss Z'}}
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
       </div>
-      </div>
-      
+    </div>
   </div>
 </body>
 </html>
