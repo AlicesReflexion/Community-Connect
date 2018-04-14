@@ -10,35 +10,6 @@ myApp.run(['$rootScope', '$location', function($rootScope, $location) {
   }); //$routeChangeError
 }]); //run
 
-myApp.service('StorageService', function() {
-    var userID =" ocampossoto1@gmail.com";
-    var community_id;
-
-    //setuser ID
-    var setUser = function(UID){
-        console.log(UID);
-        userID = UID;
-    }
-    //get user ID
-    var getUser = function(){
-        return userID;
-    }
-    //Setter
-    var setID = function(ID) {
-        community_id = ID;
-    };
-    //getter
-    var getCommunity_id = function(){
-        return community_id;
-    };
-    //return fucntions
-    return {
-        setUser: setID,
-        setID: setID,
-        getUser: getUser,
-        getCommunity_id: getCommunity_id
-    };
-});
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
@@ -53,6 +24,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
     when('/events', {
       templateUrl: 'views/events.html',
       controller: 'EventsController'
+    }).
+    when('/community_create', {
+        templateUrl: 'views/community_create.html',
+        controller: 'Community_CreateController'
     }).
     when('/success', {
       templateUrl: 'views/success.html',

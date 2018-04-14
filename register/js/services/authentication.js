@@ -16,6 +16,7 @@ myApp.factory('Authentication',
     }
   });
 
+
   myObject = {
     login: function(user) {
       auth.$signInWithEmailAndPassword(
@@ -29,7 +30,7 @@ myApp.factory('Authentication',
     }, //login
 
     logout: function() {
-      return auth.$signOut();
+      auth.$signOut();
     }, //logout
 
     requireAuth: function() {
