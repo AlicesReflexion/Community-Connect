@@ -13,10 +13,11 @@ var normal_list=[];
 var Ref = database.ref('Community List');
 
 
-function get_data() {
+ function get_data() {
     return Ref.once('value').then(function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
         var childData = (childSnapshot.toJSON());
+          console.log(childData);
             var post_keys = Object.keys(childData.Post);
             for(i=0; i < post_keys.length; i++){
                 var current_post = childData.Post[post_keys[i]];
@@ -28,17 +29,28 @@ function get_data() {
                     normal_list.push(current_post);
                 }
             }
-            var event_keys = Object.keys(childData.Events);
-            for(i=0; i < event_keys.length; i++){
-                var current_event = childData.Events[event_keys[i]];
+            //var event_keys = Object.keys(childData.Events);
+            //for(i=0; i < event_keys.length; i++){
+                //var current_event = childData.Events[event_keys[i]];
                 //console.log(current_event);
-            }
+            //}
         });
         return snapshot.val();
     });
 }
 
+function get_posts() {
+  var currentPostsRef = firebase.database().ref('/Community List/' + currentCommunity() + '/Post');
+  currentPostsRef.on('value', function(snapshot) {
 
+  });
+}
+
+
+
+function currentCommunity() {
+  return sessionStorage.getItem('community');
+}
 
 
 function signin(e) {
@@ -76,8 +88,16 @@ function signOut() {
   });
 }
 
+function setCommunity(e, communityId) {
+  e.preventDefault();
+  sessionStorage['community'] = communityId;
+  location.reload();
+}
+
+
+var completetemplate = "";
+var communityList = "";
 function populateCommunities(userId) {
-  var communityList;
   var communityNames = [];
   var template = "";
   firebase.database().ref('/User List/' + userId + "/Communities").once('value').then(function(snapshot) {
@@ -85,9 +105,10 @@ function populateCommunities(userId) {
     communityList.forEach(function(element) {
       firebase.database().ref('/Community List/' + element + '/Name').once('value').then(function(snapshot) {
         communityNames.push(snapshot.val());
-        template += genFromTemplate("communitylist.html", [{"find": "CommunityID", "replace": element},{"find": "communityName", "replace": snapshot.val()}]);
+        template += genFromTemplate("communitylist.html", [{"find": "CommunityID", "replace": "\'" + element + "\'"},{"find": "communityName", "replace": snapshot.val()}]);
+        completetemplate += template;
         if (communityNames.length == communityList.length) {
-          insertCommunities(template);
+          insertCommunities(completetemplate);
         }
       });
     });
@@ -97,9 +118,7 @@ function populateCommunities(userId) {
     header = header.replace("{{User Name}}", snapshot.val());
     document.getElementsByClassName("header")[0].innerHTML = header;
   });
-  var url = new URL(window.location);
-  var community = url.searchParams.get("community");
-  firebase.database().ref('/Community List/' + community + "/Name").once('value').then(function(snapshot) {
+  firebase.database().ref('/Community List/' + currentCommunity() + "/Name").once('value').then(function(snapshot) {
     var header = document.getElementsByClassName("header")[0].innerHTML;
     header = header.replace("{{Community Name}}", snapshot.val());
     document.getElementsByClassName("header")[0].innerHTML = header;
@@ -128,15 +147,4 @@ function toggleCommunities() {
   if (document.getElementsByClassName("communitylist")[0].style.display == "block") {
     document.getElementsByClassName("communitylist")[0].style.display = "none"; } else {
     document.getElementsByClassName("communitylist")[0].style.display = "block"; }
-}
-
-function grabPosts(community) {
-  var posts = firebase.database().ref('/Community List/' + community + "/Post");
-  posts.on('value', function(snapshot) {
-    snapshot.forEach(function (element) {
-      var text = element.toJSON().Title;
-      var username = element.toJSON().Creator.Name;
-      var template = genFromTemplate("posts.html", [{"find": "Post Text", "replace": text},{"find": "User Name", "replace": username}]);
-    });
-    });
 }
