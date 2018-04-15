@@ -3,18 +3,26 @@
   <div class="textintro">
     <h1 style="margin: 0; display: inline-block;">Community Portal</h1>
     <button style="float: right; padding:1%;" ng-show='Admin' class="btn"  ng-click="go_admin_page()">Admin</button>
-    <button style="float: right; padding:1%;" ng-show='!Admin' class="btn"  ng-click="go_events_page()">Join A Community</button>
+    <button style="float: right; padding:1%;" ng-show='!Admin' class="btn"  ng-click="go_to_request()">Join A Community</button>
+    <button style="float: right; margin-right: 1%; padding:1%;" ng-show='!Member' class="btn"  ng-click="new_community()">Create A Community</button>
   </div>
-  <div class="postform">
+  <div class="postform" ng-show='Member'>
     <form>
       <fieldset>
       <textarea></textarea>
-
+         <div>
+             <p style="color:red;">Emergency?</p>
+             <input  type="checkbox" name="priority" value="Emergency">
+         </div>
       </fieldset>
       <button type="submit" class="btn" ng-click="publishPost($event)">Post!</button>
     </form>
 
   </div>
+    <div class="postform" ng-show='!Member'>
+        <br>
+        <h2>Looks Like you're not a Member of any communities. Please join a community or create a new one.</h2>
+    </div>
   <div id="div_PriorityList">
     <div ng-repeat="post in PriorityList">
       <div id="PPost" class="post priority">
