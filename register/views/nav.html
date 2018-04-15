@@ -1,9 +1,10 @@
   <div class="branding">
-    <a ng-href="#/">CommunityConnect</a>
+    <a ng-href="#/" ng-hide="currentUser">CommunityConnect</a>
+    <a ng-href="#/success" ng-hide="!currentUser">CommunityConnect</a>
   </div>
 
   <ul>
-    <li><a ng-href="#/login" ng-click="logout()">Logout</a></li>
+    <li><a ng-show="currentUser" ng-href="#/login" ng-click="logout()">Logout</a></li>
     <li><a ng-hide="currentUser" ng-href="#/login">Login</a></li>
     <li><a ng-hide="currentUser" ng-href="#/register">Register</a></li>
   </ul>
