@@ -22,10 +22,10 @@ function insertCommunities(template) {
 
 var completetemplate = "";
 var communityList = "";
-function populateCommunities(userId) {
+/* function populateCommunities(userId) {
   var communityNames = [];
   var template = "";
-  firebase.database().ref('/User List/' + userId + "/Communities").once('value').then(function(snapshot) {
+  firebase.database().ref('/users/' + userId + "/Communities").once('value').then(function(snapshot) {
     communityList = Object.values(snapshot.toJSON());
     communityList.forEach(function(element) {
       firebase.database().ref('/Community List/' + element + '/Name').once('value').then(function(snapshot) {
@@ -38,7 +38,26 @@ function populateCommunities(userId) {
       });
     });
   });
-  }
+  } */
+
+function populateCommunities(userId) {
+  var completetemplate = "";
+  firebase.database().ref('/Community List').once('value').then(function(snapshot) {
+    communityList = snapshot.toJSON();
+    for (var community in communityList) {
+      var obj = communityList[community];
+      if (!Object.values(obj.Members).includes(userId)) {
+        delete communityList[community];
+      }
+    }
+    for (var community in communityList) {
+      var obj = communityList[community]
+      var template = genFromTemplate("communitylist.html", [{"find": "CommunityID", "replace": "\'" + community + "\'"},{"find": "communityName", "replace": obj.Name}]);
+      completetemplate += template;
+    }
+    insertCommunities(completetemplate);
+    });
+}
 
 function toggleCommunities(e) {
   e.preventDefault();
