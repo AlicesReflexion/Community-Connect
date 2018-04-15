@@ -12,6 +12,9 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     $scope.community = sessionStorage.getItem("community");
     $scope.userid = user.uid;
     $scope.current_user = "null";
+    firebase.database().ref('/Community List/' + $scope.community + '/Name/').once('value').then(function(snapshot) {
+    $scope.communityName = snapshot.val();
+    });
 
     try{
         $scope.community = sessionStorage.getItem("community");
