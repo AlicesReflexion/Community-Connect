@@ -1,13 +1,12 @@
 myApp.controller('CreateController', ['$scope','$firebaseObject','$location', function($scope, $firebaseObject, $location) {
 
     $scope.back_suc = function(){
-        try {
-            // session code here
-            sessionStorage.setItem("community_id", $scope.community)
-        }
-        catch (e) {
-            sessionStorage.clear();
-        }
+        // try {
+        //     sessionStorage.setItem("community", $scope.community)
+        // }
+        // catch (e) {
+        //     sessionStorage.clear();
+        // }
         $location.path('/success');
     };
 
@@ -17,6 +16,7 @@ myApp.controller('CreateController', ['$scope','$firebaseObject','$location', fu
     catch(e){
         $scope.back_suc();
     }
+
     if($scope.userid === null){
         $scope.back_suc();
     }

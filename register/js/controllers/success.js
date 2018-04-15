@@ -76,6 +76,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                                     //update community key in scope and update the scope
                                     $scope.community = childSnapshot.key;
                                     $scope.$apply();
+                                    console.log("Member!");
                                     break;
                                 }
                             }
@@ -88,6 +89,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                     $scope.load_post();
                 }
             });
+            console.log("checking rediriect", $scope.community);
             if($scope.community === "null" || $scope.community == null){
                 console.log("redirecting");
                 $scope.new_community();
@@ -108,7 +110,6 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
             var refCurrentPostsRef = firebase.database().ref('/Community List/' + $scope.community + '/Post');
             refCurrentPostsRef.once('value').then(function(snapshot) {
                 //put post in appropriate list and update page
-                console.log(snapshot);
                 try{
                     Object.values(snapshot.val()).forEach(function(element) {
                         if (element.Priority) {
@@ -132,7 +133,6 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
         try {
             // session code here
             sessionStorage.setItem("userID", $scope.current_user.uid);
-            sessionStorage.setItem("community_id", $scope.community);
             sessionStorage.setItem("community", $scope.community);
         }
         catch (e) {
@@ -143,6 +143,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     if($scope.userid !== "null" && $scope.userid !== null){
         //run get community function
         console.log("getting community", $scope.userid);
+        sessionStorage.setItem('community', "null");
         $scope.getCommunity();
     }
     else{
@@ -151,12 +152,12 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                 $scope.current_user = user;
                 $scope.userid = user.uid;
                 $scope.$apply();
-                console.log("Running get Community", $scope.userid);
+                sessionStorage.setItem('community', "null");
                 $scope.getCommunity();
 
             } else {
                 // No user is signed in.
-                console.log("waiting for user...")
+                console.log("waiting for user...");
             }
         });
     }

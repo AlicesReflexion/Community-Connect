@@ -1,8 +1,8 @@
 myApp.controller('EventsController', ['$scope','$location', function($scope,$location,) {
   $scope.EventList =[];
 
-  var community_id = sessionStorage.getItem("community_id");
-  if(community_id == undefined){
+  var community_id = sessionStorage.getItem("community");
+  if(community == undefined){
       $location.path('/success');
   }
 
@@ -13,5 +13,4 @@ myApp.controller('EventsController', ['$scope','$location', function($scope,$loc
           $scope.$apply();
       });
   });
-
 }]);
