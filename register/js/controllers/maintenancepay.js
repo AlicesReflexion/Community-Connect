@@ -1,4 +1,4 @@
-myApp.controller('EventsController', ['$scope','$location', function($scope,$location) {
+myApp.controller('MaintController', ['$scope','$location', function($scope,$location) {
   $scope.EventList =[];
   //
   // var community_id = communityService.getCommunity_id();

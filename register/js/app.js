@@ -33,6 +33,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'views/community_create.html',
         controller: 'CreateController'
     }).
+    when('/Maintain', {
+        templateUrl: 'views/maintenancepaylog.html',
+        controller: 'MaintController'
+    }).
     when('/request_page', {
       templateUrl: 'views/request.html',
       controller: 'RequestController'

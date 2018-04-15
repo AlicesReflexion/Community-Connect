@@ -41,6 +41,11 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
       $scope.$apply();
 
   };
+    $scope.go_to_Maintain = function(){
+        $scope.save_user_data();
+        $location.path('/Maintain');
+        $scope.$apply();
+    };
 
   $scope.publishPost = function(e) {
     var postText = e.target.parentElement.children[0].children[0].value;
