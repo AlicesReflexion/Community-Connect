@@ -34,7 +34,6 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
         $scope.userid = "null";
     }
 
-
   $scope.go_admin_page = function(){
       $scope.save_user_data();
       $location.path('/admin');
@@ -79,56 +78,120 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     }
 
    //get community
-    $scope.getCommunity = function(){
-        console.log("Started", $scope.community == null);
+    $scope.getCommunity = function(community){
+        console.log("Started", community !== null);
         //go through database and see if we are apart of the community
-        var x = firebase.database().ref('/Community List/');
-        x.once('value').then(function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-                //check if we found the community we are in
-              if($scope.community === "null" || $scope.community == null) {
-                    try{
-                        var adminlist = childSnapshot.val().Admin;
-                      for(i = 0; i< adminlist.length; i++){
-                            if (adminlist[i] === $scope.userid) {
-                                //update community key in scope and update the scope
-                                $scope.community = childSnapshot.key;
-                                $scope.Admin = true;
-                                $scope.Member =true;
-                                $scope.$apply();
-                                console.log("Admin!");
-                            }
-                        }
-                        if(!$scope.Admin){
-                            var memberlist = childSnapshot.val().Members;
-                            for(i = 0; i< memberlist.length; i++){
-                                if (memberlist[i] === $scope.userid) {
+        if(community === null || community === undefined){
+            var x = firebase.database().ref('/Community List/');
+            x.once('value').then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    //check if we found the community we are in
+                    if($scope.community === "null" || $scope.community == null) {
+                        try{
+                            var adminlist = childSnapshot.val().Admin;
+                            for(i = 0; i< adminlist.length; i++){
+                                if (adminlist[i] === $scope.userid) {
                                     //update community key in scope and update the scope
                                     $scope.community = childSnapshot.key;
-                                    $scope.Member = true;
+                                    $scope.Admin = true;
+                                    $scope.Member =true;
                                     $scope.$apply();
-                                    console.log("Member!");
+                                    console.log("Admin!");
+                                }
+                            }
+                            if(!$scope.Admin){
+                                var memberlist = childSnapshot.val().Members;
+                                for(i = 0; i< memberlist.length; i++){
+                                    if (memberlist[i] === $scope.userid) {
+                                        //update community key in scope and update the scope
+                                        $scope.community = childSnapshot.key;
+                                        $scope.Member = true;
+                                        $scope.$apply();
+                                        console.log("Member!");
+                                    }
                                 }
                             }
                         }
-                    }
-                    catch(e){
-                        console.log("Error when checking membership")
-                    }
+                        catch(e){
+                            console.log("Error when checking membership")
+                        }
 
-                } else {
-                  $scope.Member = true;
+                    }
+                    else {
+                    }
+                });
+                console.log("checking rediriect", $scope.community);
+                if($scope.community === "null" || $scope.community == null){
+
+                }
+                else{
+                    console.log("Running Get Post");
+
+                    $scope.load_post();
                 }
             });
-            console.log("checking rediriect", $scope.community);
-            if($scope.community === "null" || $scope.community == null){
+        }
+        else{
+            console.log("Community is already set");
+            var x = firebase.database().ref('/Community List/' + community +"/Admin");
+            x.once('value').then(function(snapshot){
+                console.log(snapshot.val());
+                try{
+                    var adminlist = snapshot.val();
+                    for(i = 0; i< adminlist.length; i++){
+                        if (adminlist[i] === $scope.userid) {
+                            //update community key in scope and update the scope
+                            $scope.community = community;
+                            $scope.Admin = true;
+                            $scope.Member =true;
+                            $scope.$apply();
+                            console.log("Admin!");
+                        }
+                    }
+                }catch(e){
+                    console.log("Error");
+                }
+            });
 
-            }
-            else{
-                console.log("Running Get Post");
-                $scope.load_post();
-            }
-        });
+            // x.once('value').then(function(snapshot) {
+            //     snapshot.forEach(function(childSnapshot) {
+            //         //check if we found the community we are in
+            //         if($scope.community === "null" || $scope.community == null) {
+            //             try{
+            //
+            //
+            //                 if(!$scope.Admin){
+            //                     var memberlist = childSnapshot.val().Members;
+            //                     for(i = 0; i< memberlist.length; i++){
+            //                         if (memberlist[i] === $scope.userid) {
+            //                             //update community key in scope and update the scope
+            //                             $scope.community = childSnapshot.key;
+            //                             $scope.Member = true;
+            //                             $scope.$apply();
+            //                             console.log("Member!");
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //             catch(e){
+            //                 console.log("Error when checking membership")
+            //             }
+            //
+            //         }
+            //         else {
+            //         }
+            //     });
+            //     console.log("checking rediriect", $scope.community);
+            //     if($scope.community === "null" || $scope.community == null){
+            //
+            //     }
+            //     else{
+            //         console.log("Running Get Post");
+            //
+            //         $scope.load_post();
+            //     }
+            // });
+        }
 
 
     };
@@ -178,9 +241,9 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
 
     if($scope.userid !== "null" && $scope.userid !== null){
         //run get community function
-        console.log("getting community", $scope.userid);
+        console.log("getting community", $scope.community);
         //sessionStorage.setItem('community', "null");
-        $scope.getCommunity();
+        $scope.getCommunity($scope.community);
     }
     else{
         firebase.auth().onAuthStateChanged(function(user) {
@@ -188,8 +251,9 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                 $scope.userid = user.uid;
                 $scope.UEmail = user.email;
                 $scope.$apply();
+                console.log("Community is set to: " +$scope.community);
                 //sessionStorage.setItem('community', "null");
-                $scope.getCommunity();
+                $scope.getCommunity($scope.community);
 
             } else {
                 // No user is signed in.
