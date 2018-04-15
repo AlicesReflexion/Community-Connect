@@ -14,7 +14,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     $scope.current_user = "null";
 
     try{
-        $scope.community = sessionStorage.getItem("community_id");
+        $scope.community = sessionStorage.getItem("community");
         console.log($scope.community);
     }
     catch(e){
