@@ -26,6 +26,20 @@ function get_posts() {
 }
 
 
+function writePost(e) {
+  e.preventDefault();
+  var postText = e.target[0].value;
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    var request = new XMLHttpRequest();
+    request.open('POST', 'https://us-central1-communityconnect-3f395.cloudfunctions.net/helloWorld', true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.onload = function() {
+      console.log(request.responseText);
+    }
+    var send = {"idToken": idToken, "postText": postText, "communityId": currentCommunity()};
+    request.send(JSON.stringify(send));
+  });
+}
 
 function currentCommunity() {
   return sessionStorage.getItem('community');

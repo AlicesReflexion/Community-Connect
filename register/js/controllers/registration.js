@@ -1,5 +1,5 @@
 myApp.controller('RegistrationController', 
-  ['$scope', 'Authentication', 
+  ['$scope', 'Authentication',
   function($scope, Authentication) {
 
   $scope.login = function() {
@@ -7,6 +7,8 @@ myApp.controller('RegistrationController',
   };
 
   $scope.logout = function() {
+    sessionStorage.setItem("userID", null);
+    sessionStorage.setItem("community_id", null)
     Authentication.logout();
   };
 

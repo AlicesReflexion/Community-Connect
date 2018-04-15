@@ -254,9 +254,9 @@ fieldset {
   margin: 10px 0;
 }
 
-.textintro h1 {
+.textintro {
   margin: 0;
-  padding: 0;
+  padding: 2px;
   margin-top: 20px;
 }
 
@@ -631,4 +631,54 @@ input.ng-valid.ng-touched {
 .error {
   color: red;
   padding-bottom: 10px;
+}
+
+#div_PriorityList{
+  margin-top: 5%;
+}
+
+#div_PostList{
+  margin-top: 5%;
+}
+
+#PPost{
+  margin-top: 2%;
+  border-color: Red;
+  border-radius: 2%;
+  border-width: 3px;
+  border-style: solid;
+}
+
+#NPost{
+  margin-top: 2%;
+  border-color: black;
+  border-radius: 2%;
+  border-width: 3px;
+  border-style: solid;
+}
+
+.postform > form > fieldset > textarea {
+  width: 100%;
+  resize: none;
+  height: 10ch;
+}
+
+.communitiesBox {
+  position: absolute;
+  right: 0;
+  top: 68px;
+  width: 250px;
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  height: calc(100vh - 68px);
+  max-height: 500px;
+  z-index: 500;
+  transition: transform 0.3s;
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.communitiesBox > a {
+  display: block;
+
 }

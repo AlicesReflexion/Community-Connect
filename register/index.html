@@ -47,7 +47,18 @@
   <script src="js/controllers/registration.js"></script>
   <script src="js/controllers/success.js"></script>
   <script src="js/controllers/events.js"></script>
-
+  <script src="js/controllers/create.js"></script>
+  <script src="js/controllers/request.js"></script>
+  <script src="communities.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged(function(user) {
+      if(user != null && window.location.hash === "#/login")
+        window.location.replace("#/success");
+      if(user != null) {
+        populateCommunities(user.uid);
+      }
+    });
+  </script>
 </head>
 <body>
 <header>
@@ -55,10 +66,10 @@
 </header>
 <div class="page">
 
-  <div class="userinfo" ng-show="currentUser" ng-controller="RegistrationController">
-    <span class="userinfo">Hi {{currentUser.firstname}} Welcome to CommunityConnect</span>
-    <a ng-href="#/login" ng-click="logout()">logout</a>
-  </div>
+  <!--<div class="userinfo" ng-show="currentUser" ng-controller="RegistrationController">-->
+    <!--<span class="userinfo">Hi {{currentUser.firstname}} Welcome to CommunityConnect</span>-->
+    <!--<a ng-href="#/login" ng-click="logout()">logout</a>-->
+  <!--</div>-->
 
   <main class="cf" ng-view>
   </main>

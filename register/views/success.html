@@ -1,30 +1,46 @@
 <div class="card meetings cf">
 
   <div class="textintro">
-    <h1>Community Portal</h1>
-    <p>{{ message }}</p>
+    <h1 style="margin: 0; display: inline-block;">{{communityName}}</h1>
+    <button style="float: right; padding:1%;" ng-show='Admin' class="btn"  ng-click="go_admin_page()">Admin</button>
+    <button style="float: right; padding:1%;" ng-show='!Admin' class="btn"  ng-click="go_to_request()">Join A Community</button>
+    <button style="float: right; margin-right: 1%; padding:1%;" ng-show='!Member' class="btn"  ng-click="new_community()">Create A Community</button>
   </div>
-  <div class="postform">
+  <div class="postform" ng-show='Member'>
     <form>
-      <textarea></textarea> <input class="btn" type="button" id="submitpost" value="Post!">
+      <fieldset>
+      <textarea></textarea>
+         <div>
+             <p style="color:red;">Emergency?</p>
+             <input  type="checkbox" name="priority" value="Emergency">
+         </div>
+      </fieldset>
+      <button type="submit" class="btn" ng-click="publishPost($event)">Post!</button>
     </form>
+
   </div>
-  <div ng-repeat="post in PriorityList">
-    <div id="PPost" class="post priority">
-      <div class="content">
-        {{post.Title}}
-      </div>
-      <div class="postinfo">
-        <div class="username">
-          {{post.Creator.Name}}
+    <div class="postform" ng-show='!Member'>
+        <br>
+        <h2>Looks Like you're not a Member of any communities. Please join a community or create a new one.</h2>
+    </div>
+  <div id="div_PriorityList">
+    <div ng-repeat="post in PriorityList">
+      <div id="PPost" class="post priority">
+        <div class="content">
+          {{post.Title}}
         </div>
-        <div class="time">
-          {{post.TimeStamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}
+        <div class="postinfo">
+          <div class="username">
+            {{post.Creator.Name}}
+          </div>
+          <div class="time">
+            {{post.TimeStamp * 1000 | date:'yyyy-MM-dd HH:mm:ss Z'}}
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div id="div_PostList">
+  <div id="div_PostList" style="">
     <div ng-repeat="post in PostList">
       <div id="NPost" class="post">
         <div class="content">
@@ -42,5 +58,4 @@
     </div>
   </div>
 </div>
-<button ng-click="go_events_page()">Event Page</button>
 </div><!-- meetings cf -->

@@ -16,6 +16,7 @@ myApp.factory('Authentication',
     }
   });
 
+
   myObject = {
     login: function(user) {
       auth.$signInWithEmailAndPassword(
@@ -29,13 +30,13 @@ myApp.factory('Authentication',
     }, //login
 
     logout: function() {
-      return auth.$signOut();
+      auth.$signOut();
     }, //logout
 
     requireAuth: function() {
       return auth.$requireSignIn();
     }, //require Authentication
-
+      //get user
     register: function(user) {
       auth.$createUserWithEmailAndPassword(
         user.email,

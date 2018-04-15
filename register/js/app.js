@@ -1,3 +1,7 @@
+function logout(e) {
+  firebase.auth().signOut();
+}
+
 var myApp = angular.module('myApp', 
   ['ngRoute','ng-bootstrap-datepicker',
       'daterangepicker',
@@ -13,23 +17,6 @@ myApp.run(['$rootScope', '$location', function($rootScope, $location) {
   }); //$routeChangeError
 }]); //run
 
-myApp.service('communityService', function() {
-    var community_id;
-
-    var setID = function(ID) {
-        community_id = ID;
-    };
-
-    var getCommunity_id = function(){
-        return community_id;
-    };
-
-    return {
-        setID: setID,
-        getCommunity_id: getCommunity_id
-    };
-
-});
 
 myApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
@@ -45,6 +32,18 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/events.html',
       // templateUrl: 'views/community_events.html',
       controller: 'EventsController'
+    }).
+    when('/community_create', {
+        templateUrl: 'views/community_create.html',
+        controller: 'CreateController'
+    }).
+    when('/request_page', {
+      templateUrl: 'views/request.html',
+      controller: 'RequestController'
+    }).
+    when('/admin', {
+        templateUrl: 'views/admin_view.html',
+        controller: 'AdminController'
     }).
     when('/success', {
       templateUrl: 'views/success.html',

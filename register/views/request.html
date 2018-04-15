@@ -1,0 +1,22 @@
+<section class="card request">
+    <form name="myform"
+          ng-submit="join_community()"
+          novalidate>
+
+        <div class="textintro">
+            <h1>Join a community</h1>
+            <p>To access site features</p>
+            <p class="message" ng-show="message">{{ message }}</p>
+        </div>
+
+        <fieldset>
+            <input type="text" name="Name" placeholder="Community Name"
+                   ng-model="Community.Name" ng-required="true">
+            <p class="error validationerror" ng-show="myform.Name.$invalid && myform.Name.$touched">Community Name is required</p>
+
+        </fieldset>
+
+        <button type="submit" class="btn"
+                ng-disabled="myform.$invalid">Join Community</button>
+    </form>
+</section>
