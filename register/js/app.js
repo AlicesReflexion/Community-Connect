@@ -1,5 +1,8 @@
 var myApp = angular.module('myApp', 
-  ['ngRoute', 'firebase']);
+  ['ngRoute','ng-bootstrap-datepicker',
+      'daterangepicker',
+      'datetimepicker',
+      'firebase']);
 
 myApp.run(['$rootScope', '$location', function($rootScope, $location) {
   $rootScope.$on('$routeChangeError', function(event, next, previous, error) {
@@ -40,6 +43,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
     }).
     when('/events', {
       templateUrl: 'views/events.html',
+      // templateUrl: 'views/community_events.html',
       controller: 'EventsController'
     }).
     when('/success', {

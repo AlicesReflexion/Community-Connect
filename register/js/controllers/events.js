@@ -1,7 +1,19 @@
 myApp.controller('EventsController', ['$scope','$location','communityService', function($scope,$location, communityService) {
   $scope.EventList =[];
 
-  var community_id = communityService.getCommunity_id();
+    $scope.datepickerOptions = {
+        format: 'mm/dd/yyyy',
+        autoclose: true,
+        weekStart: 0,
+        enableOnReadonly: false,
+        todayBtn: 'linked',
+        todayHighlight: true,
+        //forceParse: false,
+        keyboardNavigation: false
+    };
+
+
+    var community_id = communityService.getCommunity_id();
   if(community_id == undefined){
       $location.path('/success');
   }
