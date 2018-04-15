@@ -54,7 +54,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
         console.log(request.responseText);
       };
 
-      var send = {"idToken": idToken, "postText": postText, "communityId": $scope.community};
+      var send = {"idToken": idToken, "postText": postText, "communityId": $scope.community, "priority": e.target.parentElement.children[0].children[1].children[1].checked};
       request.send(JSON.stringify(send));
     });
   };
