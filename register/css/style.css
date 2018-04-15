@@ -656,3 +656,9 @@ input.ng-valid.ng-touched {
   border-width: 3px;
   border-style: solid;
 }
+
+.postform > form > fieldset > textarea {
+  width: 100%;
+  resize: none;
+  height: 10ch;
+}

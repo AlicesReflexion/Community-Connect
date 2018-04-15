@@ -3,9 +3,14 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
 
   var ref = firebase.database().ref();
   var auth = $firebaseAuth();
+  var user = firebase.auth().currentUser;
 
     $scope.PriorityList=[];
     $scope.PostList =[];
+    $scope.current_user =null;
+    $scope.community=null;
+    $scope.community = sessionStorage.getItem("community");
+    $scope.userid = user.uid;
     $scope.current_user = "null";
 
     try{
@@ -30,6 +35,22 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
       $scope.save_user_data();
       $location.path('/events');
 
+  };
+
+  $scope.publishPost = function(e) {
+    var postText = e.target.parentElement.children[0].children[0].value;
+    console.log(postText);
+    user.getIdToken(true).then(function(idToken) {
+      var request = new XMLHttpRequest();
+
+      request.open('POST', 'https://us-central1-communityconnect-3f395.cloudfunctions.net/helloWorld', true);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.onload = function() {
+        console.log(request.responseText);
+      }
+      var send = {"idToken": idToken, "postText": postText, "communityId": $scope.community};
+      request.send(JSON.stringify(send));
+  });
   };
 
     $scope.new_community = function(){
@@ -111,7 +132,8 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
         try {
             // session code here
             sessionStorage.setItem("userID", $scope.current_user.uid);
-            sessionStorage.setItem("community_id", $scope.community)
+            sessionStorage.setItem("community_id", $scope.community);
+            sessionStorage.setItem("community", $scope.community);
         }
         catch (e) {
             sessionStorage.clear();
