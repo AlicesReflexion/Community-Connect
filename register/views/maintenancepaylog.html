@@ -1,0 +1,69 @@
+<section class="card events">
+<div id="div_Event List">
+    <h2 style="text-align: center;">Community Events</h2>
+    <ul>
+        <li ng-repeat="event in EventList"
+            style="font-size: x-large; text-align: center; list-style: none">
+            <div id="PPost">
+                <h3>{{event.Name}}</h3>
+                <h4>Address: {{event.Address.Street}} {{event.Address.City}} {{event.Address.Zip}}</h4>
+                <h4>Date: {{event.Date}}</h4>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<BR>
+
+   <center> <h3>Maintenance Payment Log</h3></center>
+
+
+
+
+    <form action="/action_page.php">
+        Maintenance Date:
+        <input type="date" model="user.date" name="maintenancedate" class="form-control" />
+
+    </form>
+
+    <div class="container">
+
+        <form>
+
+        <div class="form-group">
+            <label for="maintenance">Description of Maintenance</label><br>
+            <textarea ng-model="user.description" class="form-control" rows=4"  id="maintenance"></textarea>
+        </div>
+
+        </form>
+
+
+
+        <div class="form-group col-md-2 col-sm-2">
+            <label>Total Bill Amount</label>
+            <input type="text" ng-model="user.billamount" placeholder='' class="form-control" />
+        </div>
+
+
+
+        <div class="form-group col-md-2 col-sm-2">
+            <label>Amount Paid</label>
+            <input type="text" ng-model="user.netpayment" placeholder='' class="form-control" />
+        </div>
+
+
+        <div class="form-group col-md-2 col-sm-2">
+                <label>Amount fully paid?</label>
+                <select  class="form-control"  ng-model="user.fullypaid" >
+
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+
+
+    </div>
+
+
+</section>
