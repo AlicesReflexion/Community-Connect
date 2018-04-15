@@ -6,12 +6,11 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
   var user = firebase.auth().currentUser;
 
     $scope.PriorityList=[];
-    $scope.PostList =[];
-    $scope.current_user =null;
-    $scope.community=null;
+    $scope.PostList = [];
     $scope.community = sessionStorage.getItem("community");
     $scope.userid = user.uid;
-    $scope.current_user = "null";
+
+    $scope.Admin = false;
 
     try{
         $scope.community = sessionStorage.getItem("community");
@@ -30,10 +29,9 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     }
 
 
-    //var user = $rootScope.currentUser;
   $scope.go_events_page = function(){
       $scope.save_user_data();
-      $location.path('/events');
+      $location.path('/request_page');
 
   };
 
@@ -47,15 +45,25 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
       request.setRequestHeader('Content-Type', 'application/json');
       request.onload = function() {
         console.log(request.responseText);
-      }
+      };
+
       var send = {"idToken": idToken, "postText": postText, "communityId": $scope.community};
       request.send(JSON.stringify(send));
-  });
+    });
   };
+
+  $scope.go_to_request = function(){
+      console.log("Requesting");
+      $scope.save_user_data();
+      $location.path('/request_page');
+      $scope.$apply();
+  }
+
 
     $scope.new_community = function(){
         $scope.save_user_data();
         $location.path('/community_create');
+        $scope.$apply();
     }
 
    //get community
@@ -67,33 +75,37 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
             snapshot.forEach(function(childSnapshot) {
                 //check if we found the community we are in
                 if($scope.community === "null" || $scope.community == null) {
-                    childSnapshot.forEach(function (item) {
-                        //check if we are in the members section
-                        if (item.key === "Members") {
-                            //go through list and compare ID's
-                            for (i = 0; i < item.val().length; i++) {
-                                if (item.val()[i] === $scope.userid) {
-                                    //update community key in scope and update the scope
-                                    $scope.community = childSnapshot.key;
-                                    $scope.$apply();
-                                    console.log("Member!");
-                                    break;
-                                }
+                    var adminlist = childSnapshot.val().Admin;
+                    for(i = 0; i< adminlist.length; i++){
+                        if (adminlist[i] === $scope.userid) {
+                            //update community key in scope and update the scope
+                            $scope.community = childSnapshot.key;
+                            $scope.Admin = true;
+                            $scope.$apply();
+                            console.log("Admin!");
+                        }
+                    }
+                    if(!$scope.Admin){
+                        var memberlist = childSnapshot.val().Members;
+                        for(i = 0; i< memberlist.length; i++){
+                            if (memberlist[i] === $scope.userid) {
+                                //update community key in scope and update the scope
+                                $scope.community = childSnapshot.key;
+                                $scope.$apply();
+                                console.log("Member!");
                             }
                         }
-                    });
-                }
-                else{
-                    console.log("Running Get Post");
-                    //run populate posts
-                    $scope.load_post();
+                    }
                 }
             });
             console.log("checking rediriect", $scope.community);
             if($scope.community === "null" || $scope.community == null){
                 console.log("redirecting");
                 $scope.new_community();
-                $scope.$apply();
+            }
+            else{
+                console.log("Running Get Post");
+                $scope.load_post();
             }
         });
 
@@ -101,6 +113,8 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     };
     //post function
     $scope.load_post = function(){
+        $scope.PriorityList = [];
+        $scope.$apply();
         //go through database with the community name and get all post
         if($scope.community == null){
             //console.log($scope.community);
@@ -132,7 +146,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     $scope.save_user_data = function(){
         try {
             // session code here
-            sessionStorage.setItem("userID", $scope.current_user.uid);
+            sessionStorage.setItem("userID", $scope.userid);
             sessionStorage.setItem("community", $scope.community);
         }
         catch (e) {
@@ -149,7 +163,6 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     else{
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                $scope.current_user = user;
                 $scope.userid = user.uid;
                 $scope.$apply();
                 sessionStorage.setItem('community', "null");

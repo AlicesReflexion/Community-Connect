@@ -1,5 +1,6 @@
 myApp.controller('CreateController', ['$scope','$firebaseObject','$location', function($scope, $firebaseObject, $location) {
 
+
     $scope.back_suc = function(){
         // try {
         //     sessionStorage.setItem("community", $scope.community)
@@ -17,11 +18,12 @@ myApp.controller('CreateController', ['$scope','$firebaseObject','$location', fu
         $scope.back_suc();
     }
 
-    if($scope.userid === null){
+    if($scope.userid === null || $scope.userid === undefined){
         $scope.back_suc();
     }
+
     $scope.create_community = function() {
-        if($scope.userid !== null){
+        if($scope.userid !== null || $scope.userid === undefined){
             //console.log("Creatng!", $scope.Community.Community_Desciption);
             firebase.database().ref('Community List/').push({
                 Name: $scope.Community.Name,
