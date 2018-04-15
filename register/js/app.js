@@ -1,3 +1,7 @@
+function logout(e) {
+  firebase.auth().signOut();
+}
+
 var myApp = angular.module('myApp', 
   ['ngRoute', 'firebase']);
 
