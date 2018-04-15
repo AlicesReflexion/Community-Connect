@@ -662,3 +662,23 @@ input.ng-valid.ng-touched {
   resize: none;
   height: 10ch;
 }
+
+.communitiesBox {
+  position: absolute;
+  right: 0;
+  top: 68px;
+  width: 250px;
+  background-color: white;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  height: calc(100vh - 68px);
+  max-height: 500px;
+  z-index: 500;
+  transition: transform 0.3s;
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+.communitiesBox > a {
+  display: block;
+
+}
