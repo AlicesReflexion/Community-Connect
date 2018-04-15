@@ -47,3 +47,9 @@ function toggleCommunities(e) {
     communityBox.style.transform = "scaleY(0)"
   } else communityBox.style.transform = "scaleY(1)";
 }
+
+function setCommunity(e, communityId) {
+  e.preventDefault();
+  sessionStorage['community'] = communityId;
+  location.reload();
+}
