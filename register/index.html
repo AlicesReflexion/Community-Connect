@@ -48,7 +48,12 @@
   <script src="js/controllers/success.js"></script>
   <script src="js/controllers/events.js"></script>
   <script src="js/controllers/create.js"></script>
-
+  <script>
+    firebase.auth().onAuthStateChanged(function(user) {
+      if(user != null && window.location.hash === "#/login")
+        window.location.replace("#/success");
+    });
+  </script>
 </head>
 <body>
 <header>
