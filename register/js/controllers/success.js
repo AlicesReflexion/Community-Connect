@@ -56,6 +56,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
       request.setRequestHeader('Content-Type', 'application/json');
       request.onload = function() {
         console.log(request.responseText);
+        $scope.load_post();
       };
 
       var send = {"idToken": idToken, "postText": postText, "communityId": $scope.community, "priority": e.target.parentElement.children[0].children[1].children[1].checked};
@@ -132,6 +133,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
             });
         }
         else{
+
             console.log("Community is already set");
             var x = firebase.database().ref('/Community List/' + community +"/Admin");
             x.once('value').then(function(snapshot){
@@ -152,6 +154,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                     console.log("Error");
                 }
             });
+            $scope.load_post();
         }
 
 
@@ -159,7 +162,8 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     //post function
     $scope.load_post = function(){
         $scope.PriorityList = [];
-        $scope.$apply();
+        $scope.PostList = [];
+        //$scope.$apply();
         //go through database with the community name and get all post
         if($scope.community == null){
             //console.log($scope.community);
