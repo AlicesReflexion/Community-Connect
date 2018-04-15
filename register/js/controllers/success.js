@@ -86,10 +86,10 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
         x.once('value').then(function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 //check if we found the community we are in
-                if($scope.community === "null" || $scope.community == null) {
+              if($scope.community === "null" || $scope.community == null) {
                     try{
                         var adminlist = childSnapshot.val().Admin;
-                        for(i = 0; i< adminlist.length; i++){
+                      for(i = 0; i< adminlist.length; i++){
                             if (adminlist[i] === $scope.userid) {
                                 //update community key in scope and update the scope
                                 $scope.community = childSnapshot.key;
@@ -116,6 +116,8 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                         console.log("Error when checking membership")
                     }
 
+                } else {
+                  $scope.Member = true;
                 }
             });
             console.log("checking rediriect", $scope.community);
@@ -177,7 +179,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     if($scope.userid !== "null" && $scope.userid !== null){
         //run get community function
         console.log("getting community", $scope.userid);
-        sessionStorage.setItem('community', "null");
+        //sessionStorage.setItem('community', "null");
         $scope.getCommunity();
     }
     else{
@@ -186,7 +188,7 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                 $scope.userid = user.uid;
                 $scope.UEmail = user.email;
                 $scope.$apply();
-                sessionStorage.setItem('community', "null");
+                //sessionStorage.setItem('community', "null");
                 $scope.getCommunity();
 
             } else {
