@@ -1,4 +1,10 @@
 <section class="card events">
+    <script>
+        function get_data(){
+            console.log();
+        }
+
+    </script>
 <div id="div_Event List">
     <h2 style="text-align: center;">Community Events</h2>
     <ul>
@@ -17,12 +23,9 @@
 
    <center> <h3>Maintenance Payment Log</h3></center>
 
-
-
-
     <form action="/action_page.php">
         Maintenance Date:
-        <input type="date" model="user.date" name="maintenancedate" class="form-control" />
+        <input type="date" id="date" model="user.date" name="maintenancedate" class="form-control" />
 
     </form>
 
@@ -32,7 +35,7 @@
 
         <div class="form-group">
             <label for="maintenance">Description of Maintenance</label><br>
-            <textarea ng-model="user.description" class="form-control" rows=4"  id="maintenance"></textarea>
+            <textarea id="description" class="form-control" rows=4"  id="maintenance"></textarea>
         </div>
 
         </form>
@@ -41,28 +44,45 @@
 
         <div class="form-group col-md-2 col-sm-2">
             <label>Total Bill Amount</label>
-            <input type="text" ng-model="user.billamount" placeholder='' class="form-control" />
+            <input type="text" id="bill_amount" placeholder='10' class="form-control" />
         </div>
 
-
-
-        <div class="form-group col-md-2 col-sm-2">
-            <label>Amount Paid</label>
-            <input type="text" ng-model="user.netpayment" placeholder='' class="form-control" />
-        </div>
 
 
         <div class="form-group col-md-2 col-sm-2">
                 <label>Amount fully paid?</label>
-                <select  class="form-control"  ng-model="user.fullypaid" >
+                <select  class="form-control" id="fully" >
 
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select>
+        </div>
+        <br>
+        <button type="submit" ng-click="get_data()" class="btn" ng-disabled="myform.$invalid">Submit</button>
+    </div>
+
+    <div>
+        <h2>Payment History</h2>
+        <div id="div_PostList" style="">
+            <div ng-repeat="item in TransList">
+                <div id="NPost" class="post">
+                    <div class="content">
+                        Description: {{item.Description}}
+                    </div>
+                    <div class="postinfo">
+                        <div class="username">
+                            Amount: {{item.bill_amount}}
+                        </div>
+                        <div class="time">
+                            Date: {{item.date}}
+                        </div>
+                        <div class="payed">
+                            Payed: {{item.payed}}
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-
+        </div>
     </div>
 
 
