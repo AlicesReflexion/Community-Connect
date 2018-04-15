@@ -37,6 +37,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'views/request.html',
       controller: 'RequestController'
     }).
+    when('/admin', {
+        templateUrl: 'views/admin_view.html',
+        controller: 'AdminController'
+    }).
     when('/success', {
       templateUrl: 'views/success.html',
       controller: 'SuccessController',

@@ -33,9 +33,9 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
     }
 
 
-  $scope.go_events_page = function(){
+  $scope.go_admin_page = function(){
       $scope.save_user_data();
-      $location.path('/request_page');
+      $location.path('/admin');
 
   };
 
