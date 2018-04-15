@@ -152,45 +152,6 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                     console.log("Error");
                 }
             });
-
-            // x.once('value').then(function(snapshot) {
-            //     snapshot.forEach(function(childSnapshot) {
-            //         //check if we found the community we are in
-            //         if($scope.community === "null" || $scope.community == null) {
-            //             try{
-            //
-            //
-            //                 if(!$scope.Admin){
-            //                     var memberlist = childSnapshot.val().Members;
-            //                     for(i = 0; i< memberlist.length; i++){
-            //                         if (memberlist[i] === $scope.userid) {
-            //                             //update community key in scope and update the scope
-            //                             $scope.community = childSnapshot.key;
-            //                             $scope.Member = true;
-            //                             $scope.$apply();
-            //                             console.log("Member!");
-            //                         }
-            //                     }
-            //                 }
-            //             }
-            //             catch(e){
-            //                 console.log("Error when checking membership")
-            //             }
-            //
-            //         }
-            //         else {
-            //         }
-            //     });
-            //     console.log("checking rediriect", $scope.community);
-            //     if($scope.community === "null" || $scope.community == null){
-            //
-            //     }
-            //     else{
-            //         console.log("Running Get Post");
-            //
-            //         $scope.load_post();
-            //     }
-            // });
         }
 
 
