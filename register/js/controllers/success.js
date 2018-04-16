@@ -154,7 +154,26 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                     console.log("Error");
                 }
             });
-            $scope.load_post();
+            x = firebase.database().ref('/Community List/' + community +"/Members");
+            x.once('value').then(function(snapshot){
+                console.log(snapshot.val());
+                try{
+                    var adminlist = snapshot.val();
+                    for(i = 0; i< adminlist.length; i++){
+                        if (adminlist[i] === $scope.userid) {
+                            //update community key in scope and update the scope
+                            $scope.community = community;
+                            $scope.Member =true;
+                            $scope.$apply();
+                            console.log("Admin!");
+                        }
+                    }
+                }catch(e){
+                    console.log("Error");
+                }
+            });
+  
+          $scope.load_post();
         }
 
 
