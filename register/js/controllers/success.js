@@ -175,12 +175,17 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                 //put post in appropriate list and update page
                 try{
                     Object.values(snapshot.val()).forEach(function(element) {
+                      console.log(element.Creator.UserID);
+                      firebase.database().ref('/users/' + element.Creator.UserID + '/firstname').once('value').then(function(usernameshot) {
+                        console.log(usernameshot.val());
+                        element.Creator.UserID = usernameshot.val();
                         if (element.Priority) {
                             $scope.PriorityList.push(element);
                         } else {
                             $scope.PostList.push(element);
                         }
                         $scope.$apply();
+                      });
                     });
                 }
                 catch(e){
