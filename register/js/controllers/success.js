@@ -157,7 +157,9 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
                     console.log("Error");
                     $scope.getCommunity();
                 }
+               // $scope.Member = true;
             });
+
             $scope.load_post();
         }
 
@@ -169,8 +171,9 @@ myApp.controller('SuccessController', ['$rootScope','$scope', '$location', '$fir
         $scope.PostList = [];
         //$scope.$apply();
         //go through database with the community name and get all post
-        if($scope.community == null){
-            //console.log($scope.community);
+        if($scope.community === null){
+            console.log("Community is null checked!");
+            $scope.getCommunity(null);
             return;
         }
         else{

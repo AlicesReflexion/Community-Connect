@@ -6,7 +6,7 @@
 
     </script>
 <div id="div_Event List">
-    <h2 style="text-align: center;">Community Events</h2>
+    <h2 style="text-align: center;">Add a Payment</h2>
     <ul>
         <li ng-repeat="event in EventList"
             style="font-size: x-large; text-align: center; list-style: none">
@@ -21,10 +21,9 @@
 
 <BR>
 
-   <center> <h3>Maintenance Payment Log</h3></center>
 
     <form action="/action_page.php">
-        Maintenance Date:
+        Payment Date:
         <input type="date" id="date" model="user.date" name="maintenancedate" class="form-control" />
 
     </form>
@@ -34,7 +33,7 @@
         <form>
 
         <div class="form-group">
-            <label for="maintenance">Description of Maintenance</label><br>
+            <label for="maintenance">Description of Payment</label><br>
             <textarea id="description" class="form-control" rows=4"  id="maintenance"></textarea>
         </div>
 
