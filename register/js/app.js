@@ -1,4 +1,6 @@
 function logout(e) {
+    sessionStorage.setItem("userID", null);
+    sessionStorage.setItem("community_id", null);
   firebase.auth().signOut();
 }
 

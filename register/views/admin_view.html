@@ -1,6 +1,21 @@
-<section class="card request">
+<section class="card admin">
+
+    <div id="div_request_list" style="">
+        <div ng-repeat="item in RequestList">
+            <div id="NPost" class="post">
+                <div class="content">
+                    {{item.Email}}
+
+                </div>
+                <button type="submit" class="btn" style=" padding:1%;" data-ng-click="AcceptUser(item)">Accept</button>
+                <button type="submit" class="btn" style="padding:1%;" data-ng-click="DeclineUser(item)">Decline</button>
+
+            </div>
+        </div>
+    </div>
+
     <form name="myform"
-          ng-submit="join_community()"
+          ng-submit=""
           novalidate>
 
         <div class="textintro">

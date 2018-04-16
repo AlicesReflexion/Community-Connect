@@ -10,6 +10,9 @@ myApp.controller('RequestController', ['$scope','$firebaseObject','$location', f
     }
     $scope.added =function () {
         //redirect back to home;
+        console.log("going back");
+        $location.path("/success");
+        $scope.$apply();
     }
 
     $scope.join_community = function(){
@@ -29,6 +32,7 @@ myApp.controller('RequestController', ['$scope','$firebaseObject','$location', f
                             UID: $scope.userid
                         }
                     );
+                    console.log("Requesting done");
                     $scope.added();
                 }
                 //console.log(childSnapshot.val().Name);
